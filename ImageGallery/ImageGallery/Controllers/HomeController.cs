@@ -22,7 +22,15 @@ namespace ImageGallery.Controllers
 
         public ActionResult Index()
         {
-            return View(repository.Widget.FindAllAs<Widget>().ToList());
+            try
+            {
+                return View(repository.Widget.FindAllAs<Widget>().ToList());
+            }
+            catch
+            {
+                
+            }
+            return View();
         }
 
         public ActionResult CreateWidget()
