@@ -1,0 +1,19 @@
+﻿@using ImageGallery.Models
+@model List<Widget>
+@{ViewBag.Title = "Index";}
+<div>@Html.Raw(@ViewBag.Connection)</div>
+<h2>Widgets</h2>
+@Html.ActionLink("Create Widget", "CreateWidget") 
+<span>|</span>
+@Html.ActionLink("Remove Widget", "RemoveWidget")<br />
+
+@{
+    if (Model != null)
+    {
+        
+        foreach (Widget w in Model)
+        {
+            <span>@Html.Raw(w.id.ToString())</span><span> | </span><span>@Html.Raw(w.Name)</span><br />
+        }        
+    }
+}
