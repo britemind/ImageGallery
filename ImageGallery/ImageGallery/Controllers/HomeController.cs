@@ -35,6 +35,7 @@ namespace ImageGallery.Controllers
 
         public ActionResult CreateWidget()
         {
+            
             var widget = new Widget();
             widget.Name = DateTime.Now.ToString();
             repository.Widget.Insert(widget);
