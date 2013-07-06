@@ -22,16 +22,8 @@ namespace ImageGallery.Controllers
 
         public ActionResult Index()
         {
-            try
-            {
-                ViewBag.Connection = repository.MongoConnectionString();
-                return View(repository.Widget.FindAllAs<Widget>().ToList());
-            }
-            catch
-            {
-                
-            }
-            return View();
+            ViewBag.Connection = repository.MongoConnectionString();
+            return View(repository.Widget.FindAllAs<Widget>().ToList());
         }
 
         public ActionResult CreateWidget()
@@ -40,6 +32,7 @@ namespace ImageGallery.Controllers
             var widget = new Widget();
             widget.Name = DateTime.Now.ToString();
             repository.Widget.Insert(widget);
+
             return RedirectToAction("Index");
         }
 
