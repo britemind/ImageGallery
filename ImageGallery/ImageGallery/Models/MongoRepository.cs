@@ -12,6 +12,7 @@ namespace ImageGallery.Models
 {
     public class MongoRepository
     {
+        
         MongoClient client = null;
         MongoServer server = null;
         MongoDatabase database = null;
