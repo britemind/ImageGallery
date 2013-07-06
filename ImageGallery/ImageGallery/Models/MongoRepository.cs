@@ -12,8 +12,6 @@ namespace ImageGallery.Models
 {
     public class MongoRepository
     {
-        
-        MongoClient client = null;
         MongoServer server = null;
         MongoDatabase database = null;
         MongoCollection WidgetCollection = null;
@@ -33,8 +31,7 @@ namespace ImageGallery.Models
 
         private void Init()
         {
-            client = new MongoClient(MongoConnectionString());
-            server = client.GetServer();
+            server = MongoServer.Create(MongoConnectionString());
             database = server.GetDatabase("ImageGallery");
             WidgetCollection = database.GetCollection<Widget>("Widget");
         }
