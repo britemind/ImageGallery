@@ -32,7 +32,7 @@ namespace ImageGallery.Models
         private void Init()
         {
             server = MongoServer.Create(MongoConnectionString());
-            database = server.GetDatabase("ImageGallery");
+            database = server.GetDatabase("cefc18b2_09dd_4b2a_97ef_91d3781bfa45");
             WidgetCollection = database.GetCollection<Widget>("Widget");
         }
 
@@ -40,7 +40,7 @@ namespace ImageGallery.Models
         {
             var r = ConfigurationManager.AppSettings.Get("MONGOHQ_URL") ??
                 ConfigurationManager.AppSettings.Get("MONGOLAB_URI") ??
-                "mongodb://localhost/Things";
+                "mongodb://192.168.1.101/Things";
             return r;
         }
 
