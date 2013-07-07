@@ -32,7 +32,8 @@ namespace ImageGallery.Models
         private void Init()
         {
             server = MongoServer.Create(MongoConnectionString());
-            database = server.GetDatabase("cefc18b2_09dd_4b2a_97ef_91d3781bfa45");
+            var databaseName = MongoUrl.Create(MongoConnectionString()).DatabaseName;
+            database = server.GetDatabase(databaseName);
             WidgetCollection = database.GetCollection<Widget>("Widget");
         }
 
