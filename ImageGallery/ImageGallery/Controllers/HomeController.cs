@@ -13,11 +13,11 @@ namespace ImageGallery.Controllers
 {
     public class HomeController : Controller
     {
-        private MongoRepository repository;
+        private WidgetRepository repository;
 
         public HomeController()
         {
-            repository = new MongoRepository();
+            repository = new WidgetRepository();
         }
 
         public ActionResult Index()

@@ -1,0 +1,8 @@
+﻿@{ViewBag.Title = "AddFile";}
+<h2>AddFile</h2>
+@using (Html.BeginForm("AddFile", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("id",(object)@ViewBag.id)
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}

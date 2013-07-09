@@ -1,0 +1,14 @@
+﻿@using ImageGallery.Models;
+@model Gallery
+@{
+    ViewBag.Title = "ThumbnailView";
+}
+<h2>ThumbnailView</h2>
+@foreach (Image i in Model.Images)
+{
+    <div style="float:left;padding:5px;">
+        <a style="outline:none;" href="@Url.Action("FileContent")/@Html.Raw(i.ImageFileId.ToString())">
+            <img style="border:0;" alt="image" src="@Url.Action("FileContent")/@Html.Raw(i.ThumbnailId.ToString())" />
+        </a>
+    </div>
+}

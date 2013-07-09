@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using MongoDB.Bson;
+using ImageGallery.Models;
 namespace ImageGallery
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -15,9 +16,10 @@ namespace ImageGallery
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(ObjectId), new ObjectIdModelBinder()); 
+
         }
     }
 }
