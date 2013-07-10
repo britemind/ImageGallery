@@ -12,7 +12,7 @@
 <h2>Free for All Image Galleries</h2>
     @foreach (var item in Model)
     {
-        <span style="float:left;text-align:center;">
+        <span style="float:left;padding:5px;text-align:center;">
                 @try
                 {
                     <a style="outline:none;" href="@Url.Action("ThumbnailView", new { id = item.id.ToString() })">
