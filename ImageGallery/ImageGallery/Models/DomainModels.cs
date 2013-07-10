@@ -25,6 +25,24 @@ namespace ImageGallery.Models
         public ObjectId id { get; set; }
         public ObjectId ThumbnailId { get; set; }
         public ObjectId ImageFileId { get; set; }
+        [MongoDB.Bson.Serialization.Attributes.BsonIgnore]
+        public int HitCount 
+        {
+            get
+            {
+                var fileCounterRepository = new FileCounterRepository();
+                var fileCounter = fileCounterRepository.Select(this.ImageFileId.ToString());
+                if (fileCounter == null)
+                {
+                    fileCounter = new FileCounter();
+                    fileCounter.FileId = this.ImageFileId;
+                    fileCounter.Counter = 0;
+                    fileCounterRepository.Insert(fileCounter);
+                }
+                else { }
+                return fileCounter.Counter;
+            }
+        }
     }
 
     public class Widget

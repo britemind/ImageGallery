@@ -67,6 +67,5 @@ namespace ImageGallery.Models
                 "mongodb://192.168.1.101/Things";
             return r;
         }
-
     }
 }

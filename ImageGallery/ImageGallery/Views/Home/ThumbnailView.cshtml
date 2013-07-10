@@ -16,6 +16,10 @@
             <a style="outline:none;" href="@Url.Action("FileContent")/@Html.Raw(i.ImageFileId.ToString())">
                 <img style="border:0;" alt="image" src="@Url.Action("FileContent")/@Html.Raw(i.ThumbnailId.ToString())" />
             </a>
+            <br />
+            <div style="text-align:center;">
+            @Html.Raw(i.HitCount) Hits
+            </div>
         </div>
     }
 </div>
