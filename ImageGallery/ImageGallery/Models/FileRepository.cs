@@ -22,9 +22,10 @@ namespace ImageGallery.Models
             Init();
         }
 
-        public ObjectId Insert(Stream stream, string fileName)
+        public ObjectId Insert(Stream stream, string fileName, string contentType)
         {
-            var gridFsInfo = database.GridFS.Upload(stream, fileName);
+            var gridFsInfo = database.GridFS.Upload(stream, fileName, new MongoDB.Driver.GridFS.MongoGridFSCreateOptions() { ContentType = contentType });
+            
             return gridFsInfo.Id.AsObjectId;
         }
 
@@ -34,17 +35,33 @@ namespace ImageGallery.Models
             return gridFsInfo.Id.AsObjectId;
         }
 
-        public byte[] Select(string fileId)
+        public MongoDB.Driver.GridFS.MongoGridFSFileInfo SelectFileInfo(string fileId)
         {
             ObjectId oid = new ObjectId(fileId);
             var file = database.GridFS.FindOne(Query.EQ("_id", oid));
-            using (var stream = file.OpenRead())
+            return file;
+        }
+
+        public byte[] SelectContent(string fileId)
+        {
+            ObjectId oid = new ObjectId(fileId);
+            var file = database.GridFS.FindOne(Query.EQ("_id", oid));
+
+            if (file != null)
             {
-                var bytes = new byte[stream.Length];
-                stream.Read(bytes, 0, (int)stream.Length);
-                return bytes;
+                using (var stream = file.OpenRead())
+                {
+                    var bytes = new byte[stream.Length];
+                    stream.Read(bytes, 0, (int)stream.Length);
+                    return bytes;
+                }
+            }
+            else
+            {
+                return null;
             }
         }
+
 
         public void Delete(string fileId)
         {

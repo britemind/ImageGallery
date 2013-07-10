@@ -32,7 +32,4 @@ namespace ImageGallery.Models
         public ObjectId id { get; set; }
         public string Name { get; set; }
     }
-
-
-
 }

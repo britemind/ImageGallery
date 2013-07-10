@@ -1,0 +1,11 @@
+﻿@using ImageGallery.Models
+@model Gallery
+@{ViewBag.Title = "NewGallery";}
+<h2>NewGallery</h2>
+@using (Html.BeginForm())
+{
+    if (Model != null) { @Html.Hidden("id", Model.id) }
+    @Html.LabelFor(m => m.Name)
+    @Html.EditorFor(m => m.Name)
+    <input type="submit" value="Create New Gallery"/>
+}

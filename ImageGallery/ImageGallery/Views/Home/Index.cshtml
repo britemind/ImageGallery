@@ -1,18 +1,51 @@
-﻿@using ImageGallery.Models
-@model List<Widget>
-@{ViewBag.Title = "Index";}
-<h2>Widgets</h2>
-@Html.ActionLink("Create Widget", "CreateWidget") 
-<span>|</span>
-@Html.ActionLink("Remove Widget", "RemoveWidget")<br />
-
-@{
-    if (Model != null)
+﻿@model IEnumerable<ImageGallery.Models.Gallery>
+@{ViewBag.Title = "Index2";}
+<style type="text/css">
+    table,tr,th,td 
     {
-        
-        foreach (Widget w in Model)
-        {
-            <span>@Html.Raw(w.id.ToString())</span><span> | </span><span>@Html.Raw(w.Name)</span><br />
-        }        
+        border:1px solid gray;
+        padding: 0 0 0 0;
+        margin: 0 0 0 0;
+        text-align: center;
     }
-}
+</style>
+<h2>Free for All Image Galleries</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table cellpadding="8px" cellspacing="0px" >
+    <tr>
+        <td>
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td style="width:100px;">
+                @try
+                {
+                    <a style="outline:none;" href="@Url.Action("ThumbnailView", new { id = item.id.ToString() })">
+                        <img style="border:0;" alt="image" src="@Url.Action("FileContent")/@Html.Raw(item.Images[0].ThumbnailId.ToString())" />
+                    </a>
+                }
+                catch
+                {
+
+                }
+            </td>
+           
+            <td style="width:150px;">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="width:350px;">
+                @Html.ActionLink("Rename", "Edit", new { id = item.id.ToString() }) |
+                @Html.ActionLink("Add File", "AddFile", new { id = item.id.ToString() })
+                @Html.ActionLink("Thumbnails", "ThumbnailView", new { id = item.id.ToString() })
+                @Html.ActionLink("Delete", "Delete", new { id = item.id.ToString() })
+            </td>
+        </tr>
+    }
+</table>
