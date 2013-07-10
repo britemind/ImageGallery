@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<ImageGallery.Models.Gallery>
-@{ViewBag.Title = "Index2";}
+@{ViewBag.Title = "Galleries";}
 <style type="text/css">
     table,tr,th,td 
     {
@@ -10,21 +10,9 @@
     }
 </style>
 <h2>Free for All Image Galleries</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table cellpadding="8px" cellspacing="0px" >
-    <tr>
-        <td>
-        </td>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var item in Model) {
-        <tr>
-            <td style="width:100px;">
+    @foreach (var item in Model)
+    {
+        <span style="float:left;text-align:center;">
                 @try
                 {
                     <a style="outline:none;" href="@Url.Action("ThumbnailView", new { id = item.id.ToString() })">
@@ -35,17 +23,14 @@
                 {
 
                 }
-            </td>
-           
-            <td style="width:150px;">
+                <br />
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td style="width:350px;">
-                @Html.ActionLink("Rename", "Edit", new { id = item.id.ToString() }) |
-                @Html.ActionLink("Add File", "AddFile", new { id = item.id.ToString() })
-                @Html.ActionLink("Thumbnails", "ThumbnailView", new { id = item.id.ToString() })
-                @Html.ActionLink("Delete", "Delete", new { id = item.id.ToString() })
-            </td>
-        </tr>
+        </span>
     }
-</table>
+    
+    <div style="float:break;clear:both;">
+        <br />
+        <hr />
+        @Html.ActionLink("Create New", "Create")
+    </div>
+    

@@ -32,4 +32,11 @@ namespace ImageGallery.Models
         public ObjectId id { get; set; }
         public string Name { get; set; }
     }
+
+    public class FileCounter
+    {
+        public ObjectId id { get; set; }
+        public ObjectId FileId { get; set; }
+        public int Counter { get; set; }
+    }
 }

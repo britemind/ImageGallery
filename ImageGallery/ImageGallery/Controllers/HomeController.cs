@@ -11,11 +11,13 @@ namespace ImageGallery.Controllers
     {
         private GalleryRepository galleryRepository;
         private FileRepository fileRepository;
+        private FileCounterRepository fileCounterRepository;
 
         public HomeController()
         {
             galleryRepository = new GalleryRepository();
             fileRepository = new FileRepository();
+            fileCounterRepository = new FileCounterRepository();
         }
 
         public ActionResult Index()
@@ -120,6 +122,26 @@ namespace ImageGallery.Controllers
         
         public FileContentResult FileContent(string id)
         {
+
+            try
+            {
+                var fileCounter = fileCounterRepository.Select(id);
+                if (fileCounter == null)
+                {
+                    fileCounter = new FileCounter();
+                    fileCounter.FileId = new MongoDB.Bson.ObjectId(id);
+                    fileCounter.Counter = 1;
+                    fileCounterRepository.Insert(fileCounter);
+                }
+                else
+                {
+                    fileCounter.Counter += 1;
+                    fileCounterRepository.Update(fileCounter);
+                }
+            }
+            catch
+            { }
+            
             try
             {
                 var file = fileRepository.SelectContent(id);
