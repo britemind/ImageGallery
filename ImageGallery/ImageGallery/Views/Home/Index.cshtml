@@ -16,7 +16,7 @@
         <span style="float:left;padding:5px;text-align:center;">
                 @try
                 {
-                    <a style="outline:none;" href="@Url.Action("ThumbnailView", new { id = item.id.ToString() })">
+                    <a style="outline:none;text-decoration:none;" href="@Url.Action("ThumbnailView", new { id = item.id.ToString() })">
                         @{
                             if (item.Images.Count() > 0)
                             {

@@ -15,7 +15,7 @@
         <div style="float:left;padding:5px;">
             
             
-            <a style="outline:none;" href="@Url.Action("FileContent")/@Html.Raw(i.ImageFileId.ToString())">
+            <a style="outline:none;text-decoration:none;" href="@Url.Action("FileContent")/@Html.Raw(i.ImageFileId.ToString())">
                 @{
                     
                     if (i.ThumbnailId == null || i.ThumbnailId.ToString() == "000000000000000000000000")
