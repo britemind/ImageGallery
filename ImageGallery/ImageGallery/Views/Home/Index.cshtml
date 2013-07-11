@@ -20,8 +20,16 @@
                         @{
                             if (item.Images.Count() > 0)
                             {
-                                
-                                <img style="border:0;" alt="image" src="@Url.Action("FileContent")/@Html.Raw(item.Images[0].ThumbnailId.ToString())" />
+
+                                if (item.Images[0].ThumbnailId == null || item.Images[0].ThumbnailId.ToString() == "000000000000000000000000")
+                                {
+                                    <img style="border:0;" alt="image" src="@Url.Content("~/Content/Images/ThumbnailNotAvailable.jpg")" />
+                                }
+                                else
+                                {
+                                    <img style="border:0;" alt="image" src="@Url.Action("FileContent")/@Html.Raw(item.Images[0].ThumbnailId.ToString())" />    
+                                }
+
                             }
                             else
                             {

@@ -122,7 +122,6 @@ namespace ImageGallery.Controllers
         
         public FileContentResult FileContent(string id)
         {
-
             try
             {
                 var fileCounter = fileCounterRepository.Select(id);
@@ -141,7 +140,7 @@ namespace ImageGallery.Controllers
             }
             catch
             { }
-            
+
             try
             {
                 var file = fileRepository.SelectContent(id);
