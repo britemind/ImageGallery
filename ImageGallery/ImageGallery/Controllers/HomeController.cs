@@ -7,6 +7,25 @@ using ImageGallery.Models;
 
 namespace ImageGallery.Controllers
 {
+    
+    public class AuthorizeSiteAttribute : FilterAttribute, IActionFilter
+    {
+        void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var siteAdmin = new SiteAdminRepository();
+            if (siteAdmin.SiteEnabled==false)
+            {
+                filterContext.Result = new RedirectResult("~/NotAuthorized/Index");
+            }
+        }
+
+        void IActionFilter.OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            //throw new NotImplementedException();
+        }
+    }
+
+    [AuthorizeSite]
     public class HomeController : Controller
     {
         private GalleryRepository galleryRepository;
@@ -197,6 +216,8 @@ namespace ImageGallery.Controllers
         
         public ActionResult Delete(string id)
         {
+            var o = new CleanupDeletedFiles();
+            o.Init();
             return View(galleryRepository.Select(id));
         }
 

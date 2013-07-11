@@ -57,4 +57,12 @@ namespace ImageGallery.Models
         public ObjectId FileId { get; set; }
         public int Counter { get; set; }
     }
+
+    public class SiteAdmin
+    {
+        public ObjectId id { get; set; }
+        public bool SiteEnabled { get; set; }
+    }
+
+
 }
