@@ -42,6 +42,13 @@ namespace ImageGallery.Models
             return file;
         }
 
+        public List<MongoDB.Driver.GridFS.MongoGridFSFileInfo> SelectAll()
+        {
+            var file = database.GridFS.FindAll().ToList();
+            return file;
+        }
+
+
         public byte[] SelectContent(string fileId)
         {
             ObjectId oid = new ObjectId(fileId);

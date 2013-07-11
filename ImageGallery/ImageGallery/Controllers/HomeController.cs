@@ -170,6 +170,13 @@ namespace ImageGallery.Controllers
 
 
         }
+
+        public ActionResult Cleanup()
+        {
+            var o = new CleanupDeletedFiles();
+            o.Init();
+            return RedirectToAction("Index");
+        }
         
         public ActionResult Create()
         {

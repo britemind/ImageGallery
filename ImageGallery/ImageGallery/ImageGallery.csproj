@@ -115,6 +115,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CleanupDeletedFiles.cs" />
     <Compile Include="Models\FileCounterRepository.cs" />
     <Compile Include="Models\FileRepository.cs" />
     <Compile Include="Models\GalleryRepository.cs" />
