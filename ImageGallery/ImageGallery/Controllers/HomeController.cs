@@ -151,8 +151,25 @@ namespace ImageGallery.Controllers
             }
             catch
             {
-                return null;
+                try
+                {
+                    var tempFile = this.HttpContext.ApplicationInstance.Server.MapPath("~/Content/Images");
+                    tempFile += "\\ThumbnailNotAvailable.jpg";
+                    var fileStream = new System.IO.FileStream(tempFile, System.IO.FileMode.Open);
+                    byte[] returnData = new byte[fileStream.Length];
+                    fileStream.Read(returnData, 0, (int)fileStream.Length);
+                    fileStream.Close();
+                    var fcr = new FileContentResult(returnData, "image/jpeg");
+                    return fcr;
+                }
+                catch
+                {
+                    return null;
+                }
             }
+
+
+
         }
         
         public ActionResult Create()

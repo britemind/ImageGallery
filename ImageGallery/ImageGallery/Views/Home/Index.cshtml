@@ -11,13 +11,23 @@
     }
 </style>
 <h2>Free for All Image Galleries</h2>
-    @foreach (var item in Model)
+    @foreach (var item in Model.ToList().OrderBy(m => m.Name))
     {
         <span style="float:left;padding:5px;text-align:center;">
                 @try
                 {
                     <a style="outline:none;" href="@Url.Action("ThumbnailView", new { id = item.id.ToString() })">
-                        <img style="border:0;" alt="image" src="@Url.Action("FileContent")/@Html.Raw(item.Images[0].ThumbnailId.ToString())" />
+                        @{
+                            if (item.Images.Count() > 0)
+                            {
+                                
+                                <img style="border:0;" alt="image" src="@Url.Action("FileContent")/@Html.Raw(item.Images[0].ThumbnailId.ToString())" />
+                            }
+                            else
+                            {
+                                <img style="border:0;" alt="image" src="@Url.Content("~/Content/Images/ThumbnailNotAvailable.jpg")" />
+                            }
+                        }
                     </a>
                 }
                 catch
